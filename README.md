@@ -3,7 +3,7 @@
 (1)完全支持MySql协议  
 (2)完全支持Mybatis-Generator  
 (3)支持Schema和Table  
-(4)支持客户端创建Schema和表  
+(4)支持客户端创建Schema和Table  
 (5)支持常用select语句where,condition,行运算等  
 (6)支持文件格式
 ##启动
