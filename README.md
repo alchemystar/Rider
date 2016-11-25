@@ -48,7 +48,7 @@ Engine='archer' SEP=',' Charset='gbk' SkipWrong='false'  comment='just for test'
 ```
 Engine=archer 默认引擎，即默认以换行符和分隔符来组织文件的结构  
 SEP=',',可以指定当前文件用哪种分隔符来分隔  
-Charset='gbk',指定当前文件的编码格式
+Charset='gbk',指定当前文件的编码格式   
 SkipWrong='false' false:文件某一行列数和定义列数不匹配，则报error|true,忽略当前行   
 ### 配置表对应的文件路径
 session内配置:  
