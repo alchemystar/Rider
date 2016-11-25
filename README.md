@@ -78,7 +78,7 @@ set names gbk;
 ```
 (5)支持两表join
 ```
-select a.id,b.id from t_archer as a join t_archer as b on a.id=b.id where id>1;
+select a.id,b.id from t_rider as a join t_archer as b on a.id=b.id where id>1;
 ```
 
 
