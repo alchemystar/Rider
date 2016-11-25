@@ -13,7 +13,7 @@ import alchemystar.util.StatementBuilder;
 public class TableBase extends Table {
 
     public TableBase(CreateTableData data) {
-        super(data.schema, data.id, data.tableName, data.seperator, data.skipWrong);
+        super(data.schema, data.id, data);
         super.tableEngine = data.tableEngine;
         Column[] cols = new Column[data.columns.size()];
         data.columns.toArray(cols);

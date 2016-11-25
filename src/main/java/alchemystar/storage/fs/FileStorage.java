@@ -71,11 +71,16 @@ public class FileStorage {
 
     public void initRead() {
         try {
-            bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "GBK"));
+            bufferedReader =
+                    new BufferedReader(new InputStreamReader(new FileInputStream(filePath), table.getCharset()));
             String line = null;
-            int rowNum = 1;
             // 一行一行读取
+            int skipedCount = 0;
             while ((line = bufferedReader.readLine()) != null) {
+                if (skipedCount < table.getSkipRows()) {
+                    skipedCount++;
+                    continue;
+                }
                 if (StringUtils.isEmpty(line)) {
                     continue;
                 }

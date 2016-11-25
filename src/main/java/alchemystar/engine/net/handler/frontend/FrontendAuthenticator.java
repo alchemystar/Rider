@@ -3,10 +3,11 @@ package alchemystar.engine.net.handler.frontend;
 import java.net.InetSocketAddress;
 import java.security.NoSuchAlgorithmException;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import alchemystar.engine.config.SystemConfig;
+import alchemystar.engine.Database;
 import alchemystar.engine.net.proto.mysql.AuthPacket;
 import alchemystar.engine.net.proto.mysql.BinaryPacket;
 import alchemystar.engine.net.proto.mysql.HandshakePacket;
@@ -120,9 +121,13 @@ public class FrontendAuthenticator extends ChannelHandlerAdapter {
     }
 
     protected boolean checkPassword(byte[] password, String user) {
-        // todo config
-        String pass = SystemConfig.PassWord;
-
+        if (StringUtils.isEmpty(user)) {
+            return false;
+        }
+        if (!user.equals(Database.getInstance().getUserName())) {
+            return false;
+        }
+        String pass = Database.getInstance().getPassWd();
         // check null
         if (pass == null || pass.length() == 0) {
             if (password == null || password.length == 0) {

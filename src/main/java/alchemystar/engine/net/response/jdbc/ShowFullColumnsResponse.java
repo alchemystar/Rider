@@ -100,11 +100,10 @@ public class ShowFullColumnsResponse {
         rowDataPacket.add(column.getName().getBytes());
         rowDataPacket.add(getType(column.getType()));
         if (column.getType() == Value.STRING) {
-            if (charset.toUpperCase().equals("GBK")) {
-                rowDataPacket.add("gb2312".getBytes());
-            } else {
-                // 默认为utf8
+            if (charset.toUpperCase().equals("UTF-8") || charset.toUpperCase().equals("UTF8")) {
                 rowDataPacket.add("utf8_general_ci".getBytes());
+            } else {
+                rowDataPacket.add("gb2312".getBytes());
             }
         } else {
             rowDataPacket.add("NULL".getBytes());

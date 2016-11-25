@@ -32,6 +32,7 @@ public class FrontConnectionFactory {
         logger.info("connection Id=" + connection.getId());
         connection.setCharset(SystemConfig.DEFAULT_CHARSET);
         connection.setTxIsolation(SystemConfig.DEFAULT_TX_ISOLATION);
+        connection.setLastActiveTime();
         return connection;
     }
 }

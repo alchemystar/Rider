@@ -250,6 +250,8 @@ public class Parser {
         String tableName = readIdentifierWithSchema();
         Schema schema = getSchema();
         CreateTable command = new CreateTable(session, schema);
+        // show tables 用
+        command.setOriginSql(originalSQL);
         command.setTableName(tableName);
         command.setIfNotExists(ifNotExists);
         if (readIf("(")) {
@@ -282,6 +284,13 @@ public class Parser {
             }
             command.setSeperator(seperator);
         }
+
+        if (readIf("CHARSET")) {
+            read("=");
+            String charset = readString();
+            command.setCharset(charset);
+        }
+
         if (readIf("SKIPWRONG")) {
             read("=");
             String state = readString().toUpperCase();
@@ -634,12 +643,6 @@ public class Parser {
     private String readFromAlias(String alias) {
         if (readIf("AS")) {
             alias = readAliasIdentifier();
-        } else if (currentTokenType == IDENTIFIER) {
-            // left and right are not keywords (because they are functions as
-            // well)
-            if (!isToken("LEFT") && !isToken("RIGHT") && !isToken("FULL")) {
-                alias = readAliasIdentifier();
-            }
         }
         return alias;
     }

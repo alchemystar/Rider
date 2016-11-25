@@ -1,6 +1,7 @@
 package alchemystar.engine.net.handler.frontend;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -41,6 +42,7 @@ public class FrontendConnection {
     protected Session session;
     // update by the ResponseHandler
     private long lastInsertId;
+    private long lastActiveTime;
 
     private static final long AUTH_TIMEOUT = 15 * 1000L;
 
@@ -103,6 +105,7 @@ public class FrontendConnection {
 
     public void close() {
         logger.info("close frontedconnection,host:{},port:{}", host, port);
+        ctx.close();
     }
 
     public void ping() {
@@ -135,7 +138,6 @@ public class FrontendConnection {
     }
 
     public void writeErrMessage(int errno, String msg) {
-        logger.warn(String.format("[FrontendConnection]ErrorNo=%d,ErrorMsg=%s", errno, msg));
         writeErrMessage((byte) 1, errno, msg);
     }
 
@@ -143,6 +145,7 @@ public class FrontendConnection {
         ByteBuf byteBuf = ctx.alloc().buffer(data.length);
         byteBuf.writeBytes(data);
         ctx.writeAndFlush(byteBuf);
+        setLastActiveTime();
     }
 
     public void writeErrMessage(byte id, int errno, String msg) {
@@ -151,10 +154,7 @@ public class FrontendConnection {
         err.errno = errno;
         err.message = encodeString(msg, charset);
         err.write(ctx);
-    }
-
-    public int getCharsetIndex() {
-        return charsetIndex;
+        setLastActiveTime();
     }
 
     public boolean setCharsetIndex(int ci) {
@@ -194,6 +194,7 @@ public class FrontendConnection {
             session.execute(sql);
             OkResponse.response(this);
         }
+        setLastActiveTime();
     }
 
     public String getCharset() {
@@ -330,4 +331,13 @@ public class FrontendConnection {
     public void setSession(Session session) {
         this.session = session;
     }
+
+    public long getLastActiveTime() {
+        return lastActiveTime;
+    }
+
+    public void setLastActiveTime() {
+        this.lastActiveTime = (new Date()).getTime();
+    }
+
 }

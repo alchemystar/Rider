@@ -12,20 +12,18 @@ import java.util.Random;
 public class StringUtil {
     private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
     private static final Random RANDOM = new Random();
-    private static final char[] CHARS = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'q', 'w', 'e', 'r', 't',
+    private static final char[] CHARS = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'q', 'w', 'e', 'r', 't',
             'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm',
             'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X',
-            'C', 'V', 'B', 'N', 'M' };
+            'C', 'V', 'B', 'N', 'M'};
 
     /**
      * 字符串hash算法：s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1] <br>
      * 其中s[]为字符串的字符数组，换算成程序的表达式为：<br>
      * h = 31*h + s.charAt(i); => h = (h << 5) - h + s.charAt(i); <br>
      *
-     * @param start
-     *            hash for s.substring(start, end)
-     * @param end
-     *            hash for s.substring(start, end)
+     * @param start hash for s.substring(start, end)
+     * @param end   hash for s.substring(start, end)
      */
     public static long hash(String s, int start, int end) {
         if (start < 0) {
@@ -87,10 +85,12 @@ public class StringUtil {
     }
 
     public static byte[] hexString2Bytes(char[] hexString, int offset, int length) {
-        if (hexString == null)
+        if (hexString == null) {
             return null;
-        if (length == 0)
+        }
+        if (length == 0) {
             return EMPTY_BYTE_ARRAY;
+        }
         boolean odd = length << 31 == Integer.MIN_VALUE;
         byte[] bs = new byte[odd ? (length + 1) >> 1 : length >> 1];
         for (int i = offset, limit = offset + length; i < limit; ++i) {
@@ -231,8 +231,9 @@ public class StringUtil {
             int ptemp = p;
             for (int j = 0; j < 8; j++) {
                 String hexVal = Integer.toHexString(src[ptemp] & 0xff);
-                if (hexVal.length() == 1)
+                if (hexVal.length() == 1) {
                     out.append('0');
+                }
                 out.append(hexVal).append(' ');
                 ptemp++;
             }
@@ -251,8 +252,9 @@ public class StringUtil {
         int n = 0;
         for (int i = p; i < length; i++) {
             String hexVal = Integer.toHexString(src[i] & 0xff);
-            if (hexVal.length() == 1)
+            if (hexVal.length() == 1) {
                 out.append('0');
+            }
             out.append(hexVal).append(' ');
             n++;
         }
@@ -273,8 +275,9 @@ public class StringUtil {
     }
 
     public static byte[] escapeEasternUnicodeByteStream(byte[] src, String srcString, int offset, int length) {
-        if ((src == null) || (src.length == 0))
+        if ((src == null) || (src.length == 0)) {
             return src;
+        }
         int bytesLen = src.length;
         int bufIndex = 0;
         int strIndex = 0;
@@ -284,26 +287,30 @@ public class StringUtil {
                 out.write(src[bufIndex++]);
             } else {// Grab the first byte
                 int loByte = src[bufIndex];
-                if (loByte < 0)
+                if (loByte < 0) {
                     loByte += 256; // adjust for signedness/wrap-around
+                }
                 out.write(loByte);// We always write the first byte
                 if (loByte >= 0x80) {
                     if (bufIndex < (bytesLen - 1)) {
                         int hiByte = src[bufIndex + 1];
-                        if (hiByte < 0)
+                        if (hiByte < 0) {
                             hiByte += 256; // adjust for signedness/wrap-around
+                        }
                         out.write(hiByte);// write the high byte here, and
                         // increment the index for the high
                         // byte
                         bufIndex++;
-                        if (hiByte == 0x5C)
+                        if (hiByte == 0x5C) {
                             out.write(hiByte);// escape 0x5c if necessary
+                        }
                     }
                 } else if (loByte == 0x5c) {
                     if (bufIndex < (bytesLen - 1)) {
                         int hiByte = src[bufIndex + 1];
-                        if (hiByte < 0)
+                        if (hiByte < 0) {
                             hiByte += 256; // adjust for signedness/wrap-around
+                        }
                         if (hiByte == 0x62) {// we need to escape the 0x5c
                             out.write(0x5c);
                             out.write(0x62);
@@ -313,8 +320,9 @@ public class StringUtil {
                 }
                 bufIndex++;
             }
-            if (bufIndex >= bytesLen)
+            if (bufIndex >= bytesLen) {
                 break;// we're done
+            }
             strIndex++;
         }
         return out.toByteArray();
@@ -339,8 +347,9 @@ public class StringUtil {
     }
 
     public static int countChar(String str, char c) {
-        if (str == null || str.isEmpty())
+        if (str == null || str.isEmpty()) {
             return 0;
+        }
         final int len = str.length();
         int cnt = 0;
         for (int i = 0; i < len; ++i) {

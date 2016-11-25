@@ -2,6 +2,8 @@ package alchemystar.table;
 
 import java.util.HashMap;
 
+import alchemystar.engine.config.SystemConfig;
+import alchemystar.parser.ddl.CreateTableData;
 import alchemystar.schema.Schema;
 import alchemystar.value.Value;
 
@@ -22,6 +24,10 @@ public class Table {
     protected String tableEngine;
     protected String seperator;
     protected boolean skipWrong;
+    protected String originSql;
+    protected int skipRows;
+    protected String pathPattern;
+    protected String charset;
 
     public Table(Schema schema, int i, String name, String seperator, boolean skipWrong) {
         this.name = name;
@@ -30,6 +36,17 @@ public class Table {
         this.seperator = seperator;
         this.skipWrong = skipWrong;
         columnMap = new HashMap<String, Column>();
+        this.charset = SystemConfig.DEFAULT_CHARSET;
+    }
+
+    public Table(Schema schema, int i, CreateTableData data) {
+        this.name = data.tableName;
+        this.schema = schema;
+        this.id = i;
+        this.seperator = data.seperator;
+        this.skipWrong = data.skipWrong;
+        columnMap = new HashMap<String, Column>();
+        this.charset = data.charset;
     }
 
     public Column[] getColumns() {
@@ -111,5 +128,37 @@ public class Table {
 
     public void setSkipWrong(boolean skipWrong) {
         this.skipWrong = skipWrong;
+    }
+
+    public String getOriginSql() {
+        return originSql;
+    }
+
+    public void setOriginSql(String originSql) {
+        this.originSql = originSql;
+    }
+
+    public int getSkipRows() {
+        return skipRows;
+    }
+
+    public void setSkipRows(int skipRows) {
+        this.skipRows = skipRows;
+    }
+
+    public String getPathPattern() {
+        return pathPattern;
+    }
+
+    public void setPathPattern(String pathPattern) {
+        this.pathPattern = pathPattern;
+    }
+
+    public String getCharset() {
+        return charset;
+    }
+
+    public void setCharset(String charset) {
+        this.charset = charset;
     }
 }

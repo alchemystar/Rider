@@ -9,9 +9,10 @@ import io.netty.channel.ChannelHandlerContext;
 
 /**
  * TailHandler 做exception的操作
+ *
  * @Author lizhuyang
  */
-public class FrontendTailHandler extends ChannelHandlerAdapter{
+public class FrontendTailHandler extends ChannelHandlerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(FrontendTailHandler.class);
 
@@ -23,10 +24,9 @@ public class FrontendTailHandler extends ChannelHandlerAdapter{
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        logger.error("Exception caught",cause);
+        logger.error("Exception caught", cause);
         FrontendGroupHandler.frontendGroup.remove(source.getId());
-        source.writeErrMessage(ErrorCode.ERR_EXCEPTION_CAUGHT,cause.getMessage());
-        // ctx.close();
+        source.writeErrMessage(ErrorCode.ERR_EXCEPTION_CAUGHT, cause.getMessage());
     }
 
 }

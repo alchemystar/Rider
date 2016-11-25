@@ -18,6 +18,7 @@ public final class ServerParseShow {
     public static final int KEYS = 6;
     public static final int VARIABLES = 7;
     public static final int SHOWTABLES = 8;
+    public static final int SHOW_CREATE_TABLE = 9;
 
     public static int parse(String stmt, int offset) {
         int i = offset;
@@ -31,6 +32,9 @@ public final class ServerParseShow {
                     continue;
                 case 'C':
                 case 'c':
+                    if (stmt.trim().toUpperCase().startsWith("SHOW CREATE TABLE")) {
+                        return SHOW_CREATE_TABLE;
+                    }
                     return COLLATION;
                 case 'D':
                 case 'd':
@@ -54,7 +58,7 @@ public final class ServerParseShow {
                     return OTHER;
                 case 'T':
                 case 't':
-                    if (stmt.trim().toUpperCase().startsWith("TABLES")) {
+                    if (stmt.trim().toUpperCase().startsWith("SHOW TABLES")) {
                         return SHOWTABLES;
                     }
                     return OTHER;

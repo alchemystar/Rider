@@ -2,7 +2,13 @@ package alchemystar.engine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import alchemystar.engine.loader.TableConfig;
+import alchemystar.engine.loader.XmlServerLoader;
+import alchemystar.parser.Parser;
+import alchemystar.parser.ddl.CreateTable;
 import alchemystar.schema.Schema;
 import alchemystar.table.MetaTable;
 import alchemystar.table.Table;
@@ -13,7 +19,7 @@ import alchemystar.util.BitField;
  */
 public class Database {
 
-    private final HashMap<String, Schema> schemas = new HashMap<String, Schema>();
+    private HashMap<String, Schema> schemas = new HashMap<String, Schema>();
 
     private final BitField objectIds = new BitField();
     // For the mybatis settings
@@ -22,16 +28,62 @@ public class Database {
     private static Database database = null;
 
     private volatile boolean metaTablesInitialized;
+    // 默认端口号是8090
+    private int serverPort = 8090;
+    // 默认用户名密码是pay|miracle
+    private String userName = "pay";
+    private String passWd = "MiraCle";
 
     // 单例模式
     static {
         database = new Database();
-        Schema test = new Schema(false, database, "test");
         Schema infoSchema = new Schema(true, database, "information_schema");
-        database.addSchema(test);
         database.addSchema(infoSchema);
         database.setInfoSchema(infoSchema);
-        database.initMetaTables();
+        database.loadConfig();
+    }
+
+    public void loadConfig() {
+        Session firstSession = this.getSession();
+        XmlServerLoader serverLoader = new XmlServerLoader();
+        serverLoader.init();
+        Map<String, List<TableConfig>> map = serverLoader.getTableConfigs();
+        for (String key : map.keySet()) {
+            List<TableConfig> tables = map.get(key);
+            Schema schema = new Schema(false, this, key);
+            for (TableConfig item : tables) {
+                addTableFromConfig(schema, item, firstSession);
+            }
+            this.addSchema(schema);
+        }
+        serverPort = serverLoader.getServerPort();
+        userName = serverLoader.getUserName();
+        passWd = serverLoader.getPasswd();
+    }
+
+    public void reload() {
+        HashMap<String, Schema> schemas = new HashMap<String, Schema>();
+        schemas.put("information_schema", infoSchema);
+        Session reloadSession = this.getSession();
+        XmlServerLoader serverLoader = new XmlServerLoader();
+        serverLoader.init();
+        Map<String, List<TableConfig>> map = serverLoader.getTableConfigs();
+        for (String key : map.keySet()) {
+            List<TableConfig> tables = map.get(key);
+            Schema schema = new Schema(false, this, key);
+            for (TableConfig item : tables) {
+                addTableFromConfig(schema, item, reloadSession);
+            }
+            schemas.put(schema.getName(), schema);
+        }
+        this.schemas = schemas;
+    }
+
+    private void addTableFromConfig(Schema schema, TableConfig tableConfig, Session session) {
+        Parser parser = new Parser(session);
+        CreateTable prepared = (CreateTable) parser.parse(tableConfig.getSql());
+        prepared.setSchema(schema);
+        prepared.update(tableConfig);
     }
 
     public ArrayList<Table> getAllTablesAndViews(boolean includeMeta) {
@@ -68,13 +120,16 @@ public class Database {
         Session session = new Session(database, "alchemystar", database.allocateObjectId());
         // todo CurrentSchema
         // 用test做CurrentSchema
-        session.setCurrentSchema(database.findSchema("test"));
+        session.setCurrentSchema(database.findSchema("information_schema"));
         return session;
 
     }
 
     public Schema findSchema(String schemaName) {
         Schema schema = schemas.get(schemaName);
+        if (schema == null) {
+            throw new RuntimeException("No such database:" + schemaName);
+        }
         return schema;
     }
 
@@ -121,5 +176,29 @@ public class Database {
 
     public HashMap<String, Schema> getSchemas() {
         return schemas;
+    }
+
+    public int getServerPort() {
+        return serverPort;
+    }
+
+    public void setServerPort(int serverPort) {
+        this.serverPort = serverPort;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassWd() {
+        return passWd;
+    }
+
+    public void setPassWd(String passWd) {
+        this.passWd = passWd;
     }
 }

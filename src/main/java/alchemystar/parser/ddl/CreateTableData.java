@@ -3,6 +3,7 @@ package alchemystar.parser.ddl;
 import java.util.ArrayList;
 
 import alchemystar.engine.Session;
+import alchemystar.engine.config.SystemConfig;
 import alchemystar.schema.Schema;
 import alchemystar.table.Column;
 
@@ -51,10 +52,12 @@ public class CreateTableData {
     /**
      * 默认seperator是逗号,默认csv
      */
-    public String seperator=",";
+    public String seperator = ",";
 
     /**
      * 默认skip掉错误的行
      */
     public boolean skipWrong = false;
+
+    public String charset = SystemConfig.DEFAULT_CHARSET;
 }

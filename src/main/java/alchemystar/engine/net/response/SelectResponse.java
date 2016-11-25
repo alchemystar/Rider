@@ -25,6 +25,7 @@ public class SelectResponse {
     private ArrayList<ArrayList<String>> rows;
     private static final EOFPacket eof = new EOFPacket();
     private byte packetId;
+    private String originCharset;
 
     public SelectResponse(Integer fieldCount) {
         this.fieldCount = fieldCount;
@@ -61,6 +62,7 @@ public class SelectResponse {
         for (ArrayList<String> item : rows) {
             RowDataPacket row = new RowDataPacket(fieldCount);
             for (String value : item) {
+                // 如果两个charset一样,则无需decode
                 row.add(StringUtil.encode(value, c.getCharset()));
             }
             row.packetId = ++packetId;
@@ -104,5 +106,13 @@ public class SelectResponse {
         public void setType(int type) {
             this.type = type;
         }
+    }
+
+    public String getOriginCharset() {
+        return originCharset;
+    }
+
+    public void setOriginCharset(String originCharset) {
+        this.originCharset = originCharset;
     }
 }

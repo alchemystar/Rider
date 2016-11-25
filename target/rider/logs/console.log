@@ -1,0 +1,62 @@
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option PermSize=256m; support was removed in 8.0
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0
+Java HotSpot(TM) 64-Bit Server VM warning: UseCMSCompactAtFullCollection is deprecated and will likely be removed in a future release.
+12:51:31,026 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.groovy]
+12:51:31,026 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+12:51:31,027 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/Users/alchemystar/mycode/Rider/target/rider/conf/logback.xml]
+12:51:31,093 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+12:51:31,111 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+12:51:31,114 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [COMMON]
+12:51:31,186 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy - No compression will be used
+12:51:31,187 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy - Will use the pattern /Users/alchemystar/var/rider/logs/%d{yyyyMMdd}/common.log for the active file
+12:51:31,194 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - The date pattern is 'yyyyMMdd' from file name pattern '/Users/alchemystar/var/rider/logs/%d{yyyyMMdd}/common.log'.
+12:51:31,194 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - Roll-over at midnight.
+12:51:31,196 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - Setting initial period to Fri Nov 25 11:48:26 CST 2016
+12:51:31,197 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy - Cleaning on start up
+12:51:31,197 |-INFO in c.q.l.core.rolling.helper.TimeBasedArchiveRemover - first clean up after appender initialization
+12:51:31,197 |-INFO in c.q.l.core.rolling.helper.TimeBasedArchiveRemover - periodsElapsed = 64
+12:51:31,201 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+12:51:31,224 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[COMMON] - Active log file name: /Users/alchemystar/var/rider/logs/common.log
+12:51:31,224 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[COMMON] - File property is set to [/Users/alchemystar/var/rider/logs/common.log]
+12:51:31,225 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+12:51:31,225 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [SQL-DIGEST]
+12:51:31,226 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy - No compression will be used
+12:51:31,226 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy - Will use the pattern /Users/alchemystar/var/rider/logs/%d{yyyyMMdd}/sql-digest.log for the active file
+12:51:31,226 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - The date pattern is 'yyyyMMdd' from file name pattern '/Users/alchemystar/var/rider/logs/%d{yyyyMMdd}/sql-digest.log'.
+12:51:31,226 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - Roll-over at midnight.
+12:51:31,227 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - Setting initial period to Thu Nov 24 21:51:34 CST 2016
+12:51:31,227 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy - Cleaning on start up
+12:51:31,227 |-INFO in c.q.l.core.rolling.helper.TimeBasedArchiveRemover - first clean up after appender initialization
+12:51:31,227 |-INFO in c.q.l.core.rolling.helper.TimeBasedArchiveRemover - periodsElapsed = 64
+12:51:31,229 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+12:51:31,230 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[SQL-DIGEST] - Active log file name: /Users/alchemystar/var/rider/logs/sql-digest.log
+12:51:31,230 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[SQL-DIGEST] - File property is set to [/Users/alchemystar/var/rider/logs/sql-digest.log]
+12:51:31,230 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+12:51:31,230 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [ERROR]
+12:51:31,234 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy - No compression will be used
+12:51:31,235 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy - Will use the pattern /Users/alchemystar/var/rider/logs/%d{yyyyMMdd}/error.log for the active file
+12:51:31,235 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - The date pattern is 'yyyyMMdd' from file name pattern '/Users/alchemystar/var/rider/logs/%d{yyyyMMdd}/error.log'.
+12:51:31,235 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - Roll-over at midnight.
+12:51:31,235 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - Setting initial period to Thu Nov 24 21:51:34 CST 2016
+12:51:31,235 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy - Cleaning on start up
+12:51:31,235 |-INFO in c.q.l.core.rolling.helper.TimeBasedArchiveRemover - first clean up after appender initialization
+12:51:31,235 |-INFO in c.q.l.core.rolling.helper.TimeBasedArchiveRemover - periodsElapsed = 64
+12:51:31,239 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+12:51:31,240 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[ERROR] - Active log file name: /Users/alchemystar/var/rider/logs/error.log
+12:51:31,240 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[ERROR] - File property is set to [/Users/alchemystar/var/rider/logs/error.log]
+12:51:31,240 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [alchemystar] to INFO
+12:51:31,240 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting additivity of logger [alchemystar] to false
+12:51:31,240 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [COMMON] to Logger[alchemystar]
+12:51:31,241 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [ERROR] to Logger[alchemystar]
+12:51:31,241 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [sql-digest] to INFO
+12:51:31,241 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting additivity of logger [sql-digest] to false
+12:51:31,241 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [SQL-DIGEST] to Logger[sql-digest]
+12:51:31,241 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [ERROR] to Logger[sql-digest]
+12:51:31,241 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+12:51:31,241 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [ERROR] to Logger[ROOT]
+12:51:31,241 |-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - Could not find an appender named [STDOUT]. Did you define it below instead of above in the configuration file?
+12:51:31,241 |-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback.qos.ch/codes.html#appender_order for more details.
+12:51:31,241 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+12:51:31,242 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@357246de - Registering current configuration as safe fallback point
+
+/database.xml

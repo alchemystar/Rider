@@ -27,6 +27,7 @@ public final class ServerParse {
     public static final int EXPLAIN = 15;
     public static final int KILL_QUERY = 16;
     public static final int CREATE_DATABASE = 17;
+    public static final int RELOAD = 18;
 
     public static int parse(String stmt) {
         for (int i = 0; i < stmt.length(); ++i) {
@@ -246,7 +247,7 @@ public final class ServerParse {
             switch (stmt.charAt(offset)) {
                 case 'E':
                 case 'e':
-                    return replaceCheck(stmt, offset);
+                    return replaceReloadCheck(stmt, offset);
                 case 'O':
                 case 'o':
                     return rollabckCheck(stmt, offset);
@@ -257,8 +258,7 @@ public final class ServerParse {
         return OTHER;
     }
 
-    // REPLACE' '
-    static int replaceCheck(String stmt, int offset) {
+    static int replaceReloadCheck(String stmt, int offset) {
         if (stmt.length() > offset + 6) {
             char c1 = stmt.charAt(++offset);
             char c2 = stmt.charAt(++offset);
@@ -270,6 +270,16 @@ public final class ServerParse {
                     && (c4 == 'C' || c4 == 'c') && (c5 == 'E' || c5 == 'e')
                     && (c6 == ' ' || c6 == '\t' || c6 == '\r' || c6 == '\n')) {
                 return REPLACE;
+            }
+        }
+        if (stmt.length() > offset + 4) {
+            char c1 = stmt.charAt(++offset);
+            char c2 = stmt.charAt(++offset);
+            char c3 = stmt.charAt(++offset);
+            char c4 = stmt.charAt(++offset);
+            if ((c1 == 'l' || c1 == 'L') && (c2 == 'o' || c2 == 'O') && (c3 == 'a' || c3 == 'A')
+                    && (c4 == 'd' || c4 == 'D')) {
+                return RELOAD;
             }
         }
         return OTHER;

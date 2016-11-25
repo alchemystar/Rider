@@ -89,8 +89,11 @@ public final class SetHandler {
 
     public static void setPath(String stmt, Session session) {
         String stmtTrim = stmt.substring(4, stmt.length()).trim();
-        System.out.println(stmtTrim);
         String cutString = stmtTrim.substring(11, stmtTrim.length());
+        if (!cutString.startsWith("\"") || !cutString.endsWith("\"")) {
+            throw new RuntimeException("use [set table_path=\"tableName:tablePath\"");
+        }
+        cutString = cutString.substring(1, cutString.length() - 1);
         String[] args = cutString.split(":");
         if (args.length != 2) {
             throw new RuntimeException(TABLE_PATH_SYNTAX_ERROR);

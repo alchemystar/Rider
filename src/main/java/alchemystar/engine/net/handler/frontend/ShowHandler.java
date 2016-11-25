@@ -1,6 +1,7 @@
 package alchemystar.engine.net.handler.frontend;
 
 import alchemystar.engine.net.response.ErrResponse;
+import alchemystar.engine.net.response.ShowCreateTable;
 import alchemystar.engine.net.response.ShowDatabases;
 import alchemystar.engine.net.response.ShowTables;
 import alchemystar.engine.net.response.jdbc.JdbcVariableResponse;
@@ -39,6 +40,9 @@ public final class ShowHandler {
                 break;
             case ServerParseShow.SHOWTABLES:
                 ShowTables.response(c);
+                break;
+            case ServerParseShow.SHOW_CREATE_TABLE:
+                ShowCreateTable.response(c, stmt);
                 break;
             default:
                 ErrResponse.response(c, "not support this set param");

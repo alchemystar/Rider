@@ -27,7 +27,8 @@ public class Schema {
     }
 
     public Table getTableOrView(String name) {
-        return tablesAndViews.get(name);
+        Table table = tablesAndViews.get(name);
+        return table;
     }
 
     public void addTable(Table table) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import alchemystar.engine.Database;
 import alchemystar.engine.Session;
+import alchemystar.engine.loader.TableConfig;
 import alchemystar.expression.Expression;
 import alchemystar.parser.Prepared;
 import alchemystar.parser.Query;
@@ -24,6 +25,7 @@ public class CreateTable extends Prepared {
     private String comment;
     private Query asQuery;
     private boolean ifNotExists;
+    private String originSql;
 
     public CreateTable(Session session, Schema schema) {
         super(session);
@@ -85,7 +87,30 @@ public class CreateTable extends Prepared {
         data.create = create;
         data.sesison = session;
         Table table = schema.createTable(data);
+        table.setOriginSql(originSql);
         table.setComment(comment);
+        db.addTable(table);
+        return 0;
+    }
+
+    public int update(TableConfig tableConfig) {
+        Database db = session.getDatabase();
+        if (schema.getTableOrView(data.tableName) != null) {
+            if (ifNotExists) {
+                return converTable(db);
+            }
+            throw new RuntimeException("Table already exists");
+        }
+        // No Support AsQuery Not
+        // No pkColumns Now
+        data.id = getObjectId();
+        data.create = create;
+        data.sesison = session;
+        Table table = schema.createTable(data);
+        table.setOriginSql(originSql);
+        table.setComment(comment);
+        table.setSkipRows(tableConfig.getSkipRows());
+        table.setPathPattern(tableConfig.getPath());
         db.addTable(table);
         return 0;
     }
@@ -126,5 +151,17 @@ public class CreateTable extends Prepared {
 
     public void setWrongSkip(boolean skipWrong) {
         data.skipWrong = skipWrong;
+    }
+
+    public String getOriginSql() {
+        return originSql;
+    }
+
+    public void setOriginSql(String originSql) {
+        this.originSql = originSql;
+    }
+
+    public void setCharset(String charset) {
+        data.charset = charset;
     }
 }

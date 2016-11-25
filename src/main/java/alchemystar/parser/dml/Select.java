@@ -148,7 +148,6 @@ public class Select extends Query {
         // no sort
         // no distinct
         // no group
-        // no limit
         topTableFilter = topFilters.get(0);
         topTableFilter.startQuery(session);
         topTableFilter.reset();
@@ -172,7 +171,6 @@ public class Select extends Query {
             offset = ((ValueLong) v).getLong() * limitRows;
 
         }
-
         int rowNumber = 0;
         currentRowNumber = 0;
         while (topTableFilter.next()) {
@@ -211,5 +209,17 @@ public class Select extends Query {
 
     private LocalResult createLocalResult(LocalResult old) {
         return old != null ? old : new LocalResult(session, expressionArray, visibleColumnCount);
+    }
+
+    public TableFilter getTopTableFilter() {
+        return topTableFilter;
+    }
+
+    public void setTopTableFilter(TableFilter topTableFilter) {
+        this.topTableFilter = topTableFilter;
+    }
+
+    public String getCharset() {
+        return topTableFilter.getTable().getCharset();
     }
 }

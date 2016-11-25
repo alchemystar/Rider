@@ -1,13 +1,18 @@
 package alchemystar.engine.net.handler.frontend;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import alchemystar.engine.config.SystemConfig;
 import alchemystar.engine.net.proto.MySQLPacket;
 import alchemystar.engine.net.proto.mysql.BinaryPacket;
 import alchemystar.engine.net.proto.util.ErrorCode;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
 
 /**
  * 命令Handler
@@ -26,6 +31,8 @@ public class FrontendCommandHandler extends ChannelHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        // 重置最后active时间
+        source.setLastActiveTime();
         BinaryPacket bin = (BinaryPacket) msg;
         byte type = bin.data[0];
         switch (type) {
@@ -64,4 +71,19 @@ public class FrontendCommandHandler extends ChannelHandlerAdapter {
                 break;
         }
     }
+
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        // 如果心跳检查>最大值,则close掉此连接
+        if (evt instanceof IdleStateEvent) {
+            if (((IdleStateEvent) evt).state().equals(IdleState.ALL_IDLE)) {
+                Long now = (new Date()).getTime();
+                System.out.println("hahaha");
+                if (now - source.getLastActiveTime() > (SystemConfig.IDLE_TIME_OUT * 1000)) {
+                    source.close();
+                }
+            }
+        }
+    }
+
 }

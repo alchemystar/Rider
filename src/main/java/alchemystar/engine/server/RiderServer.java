@@ -5,9 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import alchemystar.engine.Database;
 import alchemystar.engine.config.SocketConfig;
-import alchemystar.engine.config.SystemConfig;
 import alchemystar.engine.net.handler.factory.FrontHandlerFactory;
-import alchemystar.schema.Schema;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelFuture;
@@ -39,7 +37,7 @@ public class RiderServer extends Thread {
 
     @Override
     public void run() {
-        logger.info("Start The archer");
+        logger.info("Start The Rider");
         startServer();
     }
 
@@ -51,11 +49,7 @@ public class RiderServer extends Thread {
 
         try {
             // Rider Server
-            Database database = new Database();
-            // todo 默认的schema
-            Schema test = new Schema(false, database, "test");
-            database.addSchema(test);
-
+            Database database = Database.getInstance();
             ServerBootstrap b = new ServerBootstrap();
             // 这边的childHandler是用来管理accept的
             // 由于线程间传递的是byte[],所以内存池okay
@@ -66,7 +60,7 @@ public class RiderServer extends Thread {
                     PooledByteBufAllocator.DEFAULT)
                     .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, SocketConfig.CONNECT_TIMEOUT_MILLIS)
                     .option(ChannelOption.SO_TIMEOUT, SocketConfig.SO_TIMEOUT);
-            ChannelFuture f = b.bind(SystemConfig.ServerPort).sync();
+            ChannelFuture f = b.bind(database.getServerPort()).sync();
             f.channel().closeFuture().sync();
 
         } catch (InterruptedException e) {

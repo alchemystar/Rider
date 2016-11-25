@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import alchemystar.engine.net.proto.util.StringUtil;
 import alchemystar.engine.net.response.SelectResponse;
 import alchemystar.expression.Expression;
 import alchemystar.parser.Parser;
@@ -12,6 +13,8 @@ import alchemystar.parser.ddl.CreateTable;
 import alchemystar.parser.dml.Select;
 import alchemystar.result.ResultInterface;
 import alchemystar.schema.Schema;
+import alchemystar.table.Table;
+import alchemystar.util.PathUtil;
 import alchemystar.value.Value;
 
 /**
@@ -77,6 +80,7 @@ public class Session {
             }
             response.getRows().add(row);
         }
+        response.setOriginCharset(select.getCharset());
         return response;
     }
 
@@ -95,15 +99,25 @@ public class Session {
 
     public String getTablePath(String schemaName, String tableName) {
         Map<String, String> tableMap = schemaMap.get(schemaName);
-        if (tableMap == null) {
+        if (tableMap != null) {
+            String tablePath = schemaMap.get(schemaName).get(tableName.toUpperCase());
+            if (tablePath != null) {
+                return tablePath;
+            }
+        }
+        Schema schema = database.findSchema(schemaName);
+        if (schema == null) {
+            throw new RuntimeException("No such schema:" + schemaName);
+        }
+        Table table = schema.getTableOrView(tableName);
+        // 如果本身session没有指定path,则用默认配置渲染的path
+        if (StringUtil.isEmpty(table.getPathPattern())) {
             throw new RuntimeException(
-                    "You must specify the table path:" + tableName + ",use [set table_path=\"tableName:tablePath\"");
+                    "You must specify the table path:" + tableName + ",use [set table_path=\"tableName:tablePath\" or"
+                            + " set pathPattern in the database.xml");
+
         }
-        String tablePath = schemaMap.get(schemaName).get(tableName.toUpperCase());
-        if (tablePath == null) {
-            throw new RuntimeException("You must specify the table path,use [set table_path=\"tableName:tablePath\"");
-        }
-        return tablePath;
+        return PathUtil.renderPath(table.getPathPattern());
     }
 
     public Database getDatabase() {

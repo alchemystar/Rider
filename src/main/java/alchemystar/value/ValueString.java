@@ -31,7 +31,7 @@ public class ValueString extends Value {
         }
         return new ValueString(s);
         // todo cache
-      /*  ValueString obj = new ValueString(StringCacheUtil.cache(s));
+       /* ValueString obj = new ValueString(StringCacheUtil.cache(s));
         if (s.length() > SysProperties.OBJECT_CACHE_MAX_PER_ELEMENT_SIZE) {
             return obj;
         }
