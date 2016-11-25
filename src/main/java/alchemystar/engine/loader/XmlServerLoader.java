@@ -28,10 +28,8 @@ public class XmlServerLoader implements ServerLoader {
     private static Document doc;
 
     public XmlServerLoader() {
-
         schemas = new ArrayList<String>();
         tableConfigs = new HashMap<String, List<TableConfig>>();
-        System.out.println(databaseXmlPath);
     }
 
     public void init() {

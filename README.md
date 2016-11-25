@@ -19,8 +19,8 @@ sh start.sh
 ```
 <database>
     <port>8090</port> <!--server 端口号-->
-    <user>pay</user> <!--server 用户名-->
-    <pass>MiraCle</pass> <!--server 密码-->
+    <user>pa123</user> <!--server 用户名-->
+    <pass>Mi123</pass> <!--server 密码-->
     <schema>  <!--schema定义-->
         <name>test</name> <!--schema名称-->
         <table> <!--表定义-->
@@ -36,7 +36,7 @@ sh start.sh
 </database>
 ```
 ## 使用
-直接连接 mysql -upay -pMiraCle -P8090 -h127.0.0.1  
+直接连接 mysql -upa123 -pMi123 -P8090 -h127.0.0.1  
 jdbc连接 jdbc:mysql://127.0.0.1/test?user=pay&password=MiraCle
 ### 创建表
 ```
