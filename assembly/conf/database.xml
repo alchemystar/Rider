@@ -5,6 +5,11 @@
     <schema>
         <name>test</name>
         <table>
+            <sql> create table if not exists t_view (id BIGINT comment 'id view',nameExtension VARCHAR comment 'name extension')Engine='archer',Charset='gbk'
+            </sql>
+            <viewSql> select a.id*1000,a.name||b.extension from t_archer as a join t_archer as b where a.id=b.id </viewSql>
+        </table>
+        <table>
             <sql>
                 create table if not exists t_archer( id BIGINT comment 'id test ', name VARCHAR comment 'name
                 test',

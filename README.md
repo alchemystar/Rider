@@ -4,8 +4,9 @@
 (2)完全支持Mybatis-Generator  
 (3)支持Schema和Table  
 (4)支持客户端创建Schema和Table  
-(5)支持常用select语句where,condition,行运算等  
-(6)支持文件格式
+(5)支持常用select语句where,condition,行运算等 
+(6)支持视图功能，即用旧表的SQL定义新表 
+(7)支持各种文件格式
 ##启动
 ```
 git clone https://github.com/alchemystar/Rider.git
@@ -23,6 +24,12 @@ sh start.sh
     <pass>Mi123</pass> <!--server 密码-->
     <schema>  <!--schema定义-->
         <name>test</name> <!--schema名称-->
+         <table>
+            <sql> create table if not exists t_view (id BIGINT comment 'id view',nameExtension VARCHAR comment 'name extension')Engine='archer',Charset='gbk'
+            </sql>
+            <!--这是一个视图表，其表内容为下面的viewSql的执行结果-->
+            <viewSql> select a.id*1000,a.name||b.extension,a.id from t_archer as a join t_archer as b where a.id=b.id </viewSql>
+        </table>
         <table> <!--表定义-->
             <sql> <!--表定义sql-->
                 create table if not exists t_archer( id BIGINT comment 'id test ', name VARCHAR comment 'name
@@ -58,6 +65,10 @@ set table_path="t_archer:/home/work/archer.txt"
 配置文件内配置:   
 ```
 <pathPattern>/Users/alchemystar/tmp/rider/rider_%d{yyyy-MM-dd}.txt</pathPattern> <!--当前表对应的文件地址，可用时间格式渲染-->
+```
+视图配置,viewSql可以是任意sql(可以用视图再次创建视图):
+```
+ <viewSql> select a.id*1000,a.name||b.extension,a.id from t_archer as a join t_archer as b where a.id=b.id </viewSql>
 ```
 ### 查询表
 (1)支持\*符
