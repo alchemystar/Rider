@@ -14,7 +14,7 @@ import alchemystar.value.Value;
 public class ParserTest {
 
     public static void main(String args[]) {
-        Database database = new Database();
+        Database database = Database.getInstance();
         Schema test = new Schema(false, database, "test");
         database.addSchema(test);
         Session session = new Session(database, "SHUAIQI", 1);

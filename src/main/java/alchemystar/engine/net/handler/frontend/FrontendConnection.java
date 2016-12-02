@@ -182,11 +182,8 @@ public class FrontendConnection {
         }
     }
 
-    public void execute(String sql, int type) {
-        // if (schema == null) {
-        //      writeErrMessage(ErrorCode.ER_NO_DB_ERROR, "No database selected");
-        //      return;
-        //  } else {
+    public void execute(final String sql, final int type) {
+
         if (type == ServerParse.SELECT) {
             SelectResponse response = session.doQuery(sql);
             response.response(this);
@@ -195,6 +192,10 @@ public class FrontendConnection {
             OkResponse.response(this);
         }
         setLastActiveTime();
+    }
+
+    private void doQuery(String sql, int type) {
+
     }
 
     public String getCharset() {

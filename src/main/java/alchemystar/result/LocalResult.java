@@ -125,4 +125,12 @@ public class LocalResult implements ResultInterface, ResultTarget {
     public void setOffset(int offset) {
         this.offset = offset;
     }
+
+    public ArrayList<Value[]> getRows() {
+        return rows;
+    }
+
+    public void setRows(ArrayList<Value[]> rows) {
+        this.rows = rows;
+    }
 }

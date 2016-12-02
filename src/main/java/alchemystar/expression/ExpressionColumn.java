@@ -39,6 +39,10 @@ public class ExpressionColumn extends Expression {
 
     @Override
     public Value getValue(Session session) {
+        if (columnResolver == null) {
+            String message = "can't map " + tableAlias + "." + columnName;
+            throw new RuntimeException(message);
+        }
         return columnResolver.getValue(column);
     }
 

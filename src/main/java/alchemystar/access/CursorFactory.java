@@ -1,6 +1,7 @@
 package alchemystar.access;
 
 import alchemystar.engine.Session;
+import alchemystar.engine.net.proto.util.StringUtil;
 import alchemystar.mock.MockTable;
 import alchemystar.table.Table;
 
@@ -26,6 +27,11 @@ public class CursorFactory {
         if ("INFORMATION".equals(tableEngine)) {
             return new MetaCursor(table);
         }
-        return new FileCursor(session, table);
+        if (StringUtil.isEmpty(table.getViewSql())) {
+            return new FileCursor(session, table);
+        } else {
+            // 视图用
+            return new ViewCursor(session, table);
+        }
     }
 }

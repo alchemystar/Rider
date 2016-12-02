@@ -27,7 +27,7 @@ public class CreateTableTest {
     }
 
     public static Session getSession() {
-        Database database = new Database();
+        Database database = Database.getInstance();
         Schema test = new Schema(false, database, "test");
         test.addTable(MockTable.getTable(test));
         database.addSchema(test);

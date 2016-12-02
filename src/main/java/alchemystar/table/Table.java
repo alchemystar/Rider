@@ -27,6 +27,8 @@ public class Table {
     protected String originSql;
     protected int skipRows;
     protected String pathPattern;
+    // if viewSql is not empty,则它是视图
+    protected String viewSql;
     protected String charset;
 
     public Table(Schema schema, int i, String name, String seperator, boolean skipWrong) {
@@ -160,5 +162,13 @@ public class Table {
 
     public void setCharset(String charset) {
         this.charset = charset;
+    }
+
+    public String getViewSql() {
+        return viewSql;
+    }
+
+    public void setViewSql(String viewSql) {
+        this.viewSql = viewSql;
     }
 }

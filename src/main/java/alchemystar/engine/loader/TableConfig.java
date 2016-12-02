@@ -13,6 +13,9 @@ public class TableConfig {
 
     private String path;
 
+    // 视图sql
+    private String viewSql;
+
     public String getSql() {
         return sql;
     }
@@ -35,5 +38,13 @@ public class TableConfig {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getViewSql() {
+        return viewSql;
+    }
+
+    public void setViewSql(String viewSql) {
+        this.viewSql = viewSql;
     }
 }
