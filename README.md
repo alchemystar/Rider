@@ -5,7 +5,7 @@
 (3)支持Schema和Table  
 (4)支持客户端创建Schema和Table  
 (5)支持常用select语句where,condition,行运算等 
-(6)支持视图功能，即用旧表的SQL定义新表 
+(6)支持视图功能，即用旧表的SQL定义新表   
 (7)支持各种文件格式
 ##启动
 ```
