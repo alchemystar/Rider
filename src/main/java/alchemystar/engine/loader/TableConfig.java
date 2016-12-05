@@ -16,6 +16,9 @@ public class TableConfig {
     // 视图sql
     private String viewSql;
 
+    // Xlsx Sheet Number
+    private int sheetNumber;
+
     public String getSql() {
         return sql;
     }
@@ -46,5 +49,13 @@ public class TableConfig {
 
     public void setViewSql(String viewSql) {
         this.viewSql = viewSql;
+    }
+
+    public int getSheetNumber() {
+        return sheetNumber;
+    }
+
+    public void setSheetNumber(int sheetNumber) {
+        this.sheetNumber = sheetNumber;
     }
 }

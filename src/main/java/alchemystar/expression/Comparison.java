@@ -43,7 +43,12 @@ public class Comparison extends Condition {
         Value l = left.getValue(session);
         Value r = right.getValue(session);
         if (l.getType() != r.getType()) {
-            throw new RuntimeException("left and right type must consist");
+            if (!((l.getType() == Value.INT && r.getType() == Value.LONG) || (l.getType() == Value.LONG && r.getType()
+                    == Value.INT
+            ))) {
+                throw new RuntimeException("left and right type must consist");
+            }
+
         }
         boolean result = compare(l, r, compareType);
         return ValueBoolean.get(result);

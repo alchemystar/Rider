@@ -27,6 +27,12 @@ public class CursorFactory {
         if ("INFORMATION".equals(tableEngine)) {
             return new MetaCursor(table);
         }
+        if ("XLSX".equals(tableEngine)) {
+            return new XlsxCursor(session, table);
+        }
+        if ("VIEW".equals(tableEngine)) {
+            return new ViewCursor(session, table);
+        }
         if (StringUtil.isEmpty(table.getViewSql())) {
             return new FileCursor(session, table);
         } else {

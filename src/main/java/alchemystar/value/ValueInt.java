@@ -11,7 +11,7 @@ public class ValueInt extends Value {
 
     private static final int STATIC_SIZE = 1000;
     private static final ValueInt[] STATIC_CACHE = new ValueInt[STATIC_SIZE];
-    private final int value;
+    public final int value;
 
     static {
         for (int i = 0; i < STATIC_SIZE; i++) {
@@ -31,8 +31,15 @@ public class ValueInt extends Value {
     }
 
     public Value add(Value v) {
-        ValueInt other = (ValueInt) v;
-        return checkRange((long) value + (long) other.value);
+        if (v.getType() == Value.INT) {
+            ValueInt other = (ValueInt) v;
+            return checkRange((long) value + (long) other.value);
+        }
+        if (v.getType() == Value.LONG) {
+            ValueLong other = (ValueLong) v;
+            return checkRange((long) value + other.value);
+        }
+        throw new RuntimeException("Can't convert from " + this.getType() + " to " + v.getType());
     }
 
     private static ValueInt checkRange(long x) {
@@ -51,29 +58,63 @@ public class ValueInt extends Value {
     }
 
     public Value subtract(Value v) {
-        ValueInt other = (ValueInt) v;
-        return checkRange((long) value - (long) other.value);
+        if (v.getType() == Value.INT) {
+            ValueInt other = (ValueInt) v;
+            return checkRange((long) value - (long) other.value);
+        }
+        if (v.getType() == Value.LONG) {
+            ValueLong other = (ValueLong) v;
+            return checkRange((long) value - (long) other.value);
+        }
+        throw new RuntimeException("Can't convert from " + this.getType() + " to " + v.getType());
     }
 
     public Value multiply(Value v) {
-        ValueInt other = (ValueInt) v;
-        return checkRange((long) value * (long) other.value);
+        if (v.getType() == Value.INT) {
+            ValueInt other = (ValueInt) v;
+            return checkRange((long) value * (long) other.value);
+        }
+        if (v.getType() == Value.LONG) {
+            ValueLong other = (ValueLong) v;
+            return checkRange((long) value * (long) other.value);
+        }
+        throw new RuntimeException("Can't convert from " + this.getType() + " to " + v.getType());
     }
 
     public Value divide(Value v) {
-        ValueInt other = (ValueInt) v;
-        if (other.value == 0) {
-            throw new RuntimeException("Can't Divide By Zero");
+        if (v.getType() == Value.INT) {
+            ValueInt other = (ValueInt) v;
+            if (other.value == 0) {
+                throw new RuntimeException("Can't Divide By Zero");
+            }
+            return ValueInt.get(value / other.value);
         }
-        return ValueInt.get(value / other.value);
+        if (v.getType() == Value.LONG) {
+            ValueLong other = (ValueLong) v;
+            if (other.value == 0) {
+                throw new RuntimeException("Can't Divide By Zero");
+            }
+            return ValueInt.get((int) (value / other.value));
+        }
+        throw new RuntimeException("Can't convert from " + this.getType() + " to " + v.getType());
     }
 
     public Value modulus(Value v) {
-        ValueInt other = (ValueInt) v;
-        if (other.value == 0) {
-            throw new RuntimeException("Can't Module By Zero");
+        if (v.getType() == Value.INT) {
+            ValueInt other = (ValueInt) v;
+            if (other.value == 0) {
+                throw new RuntimeException("Can't Module By Zero");
+            }
+            return ValueInt.get(value % other.value);
         }
-        return ValueInt.get(value % other.value);
+        if (v.getType() == Value.LONG) {
+            ValueLong other = (ValueLong) v;
+            if (other.value == 0) {
+                throw new RuntimeException("Can't Module By Zero");
+            }
+            return ValueInt.get((int) (value % other.value));
+        }
+        throw new RuntimeException("Can't convert from " + this.getType() + " to " + v.getType());
     }
 
     public String getSQL() {

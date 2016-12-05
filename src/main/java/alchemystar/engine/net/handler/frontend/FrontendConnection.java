@@ -271,6 +271,7 @@ public class FrontendConnection {
 
     public void setSchema(String schema) {
         this.schema = schema;
+        session.changeCurrentSchema(schema);
     }
 
     public int getPort() {

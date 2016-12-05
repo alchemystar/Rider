@@ -112,6 +112,7 @@ public class CreateTable extends Prepared {
         table.setSkipRows(tableConfig.getSkipRows());
         table.setPathPattern(tableConfig.getPath());
         table.setViewSql(tableConfig.getViewSql());
+        table.setSheetNumber(tableConfig.getSheetNumber());
         db.addTable(table);
         return 0;
     }

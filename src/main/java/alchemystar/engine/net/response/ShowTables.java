@@ -40,8 +40,7 @@ public final class ShowTables {
         eof.packetId = ++packetId;
     }
 
-    public static void response(FrontendConnection c) {
-        ChannelHandlerContext ctx = c.getCtx();
+    public static void response(FrontendConnection c) {ChannelHandlerContext ctx = c.getCtx();
         ByteBuf buffer = ctx.alloc().buffer();
 
         // write header

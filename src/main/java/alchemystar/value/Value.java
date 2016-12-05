@@ -29,6 +29,18 @@ public abstract class Value {
             return 0;
         }
         if (this.getType() != v.getType()) {
+            // 对int 和 long的处理
+            if (this.getType() == Value.INT && v.getType() == Value.LONG) {
+                ValueLong other = (ValueLong) v;
+                // 注意,可能溢出
+                v = ValueInt.get((int) other.value);
+                return this.compareSecure(v);
+            }
+            if (this.getType() == Value.LONG && v.getType() == Value.INT) {
+                ValueInt other = (ValueInt) v;
+                v = ValueLong.get((long) other.value);
+                return this.compareSecure(v);
+            }
             throw new RuntimeException("Can't compare two different type!");
         }
         return this.compareSecure(v);

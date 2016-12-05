@@ -142,7 +142,7 @@ public class FileStorage {
                             values[i] = ValueByte.get(Byte.valueOf(rawString));
                             break;
                         default:
-                            throw new RuntimeException("Only Support Long,String,Boolean");
+                            throw new RuntimeException("Only Support BIGINT,VARCHAR,BOOLEAN");
                     }
                 }
                 Row row = new Row(values);
@@ -156,15 +156,6 @@ public class FileStorage {
             } catch (Exception e) {
                 logger.error("close file fail", e);
             }
-        }
-    }
-
-    public static void main(String args[]) {
-        String s1 = "1|2|3";
-        String seperator = "\\" + "|";
-        String[] array = s1.split(seperator);
-        for (int i = 0; i < array.length; i++) {
-            System.out.println(array[i]);
         }
     }
 

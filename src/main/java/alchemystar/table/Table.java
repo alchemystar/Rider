@@ -30,6 +30,7 @@ public class Table {
     // if viewSql is not empty,则它是视图
     protected String viewSql;
     protected String charset;
+    protected int sheetNumber;
 
     public Table(Schema schema, int i, String name, String seperator, boolean skipWrong) {
         this.name = name;
@@ -49,6 +50,7 @@ public class Table {
         this.skipWrong = data.skipWrong;
         columnMap = new HashMap<String, Column>();
         this.charset = data.charset;
+        this.sheetNumber = data.sheetNumber;
     }
 
     public Column[] getColumns() {
@@ -170,5 +172,13 @@ public class Table {
 
     public void setViewSql(String viewSql) {
         this.viewSql = viewSql;
+    }
+
+    public int getSheetNumber() {
+        return sheetNumber;
+    }
+
+    public void setSheetNumber(int sheetNumber) {
+        this.sheetNumber = sheetNumber;
     }
 }

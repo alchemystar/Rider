@@ -60,4 +60,9 @@ public class CreateTableData {
     public boolean skipWrong = false;
 
     public String charset = SystemConfig.DEFAULT_CHARSET;
+
+    /**
+     * Xlsx 文件
+     */
+    public int sheetNumber = 0;
 }

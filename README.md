@@ -4,9 +4,9 @@
 (2)完全支持Mybatis-Generator  
 (3)支持Schema和Table  
 (4)支持客户端创建Schema和Table  
-(5)支持常用select语句where,condition,行运算等 
+(5)支持常用select语句where,condition,行运算等    
 (6)支持视图功能，即用旧表的SQL定义新表   
-(7)支持各种文件格式
+(7)支持各种文件格式(各种分隔符分割,Xlsx)   
 ##启动
 ```
 git clone https://github.com/alchemystar/Rider.git

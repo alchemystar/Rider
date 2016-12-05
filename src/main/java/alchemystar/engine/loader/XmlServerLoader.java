@@ -1,6 +1,6 @@
 package alchemystar.engine.loader;
 
-import java.io.InputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,8 +18,8 @@ import org.slf4j.LoggerFactory;
 public class XmlServerLoader implements ServerLoader {
 
     private static final Logger logger = LoggerFactory.getLogger(XmlServerLoader.class);
-    //private String databaseXmlPath = "/Users/alchemystar/tmp/database.xml";
-    private String databaseXmlPath = "/database.xml";
+    private String databaseXmlPath = "/Users/alchemystar/tmp/database.xml";
+    //private String databaseXmlPath = "/database.xml";
     private List<String> schemas;
     private Map<String, List<TableConfig>> tableConfigs;
     private String userName;
@@ -34,8 +34,8 @@ public class XmlServerLoader implements ServerLoader {
 
     public void init() {
         try {
-            // File xml = new File(databaseXmlPath);
-            InputStream xml = XmlServerLoader.class.getResourceAsStream(databaseXmlPath);
+            File xml = new File(databaseXmlPath);
+            //InputStream xml = XmlServerLoader.class.getResourceAsStream(databaseXmlPath);
             SAXReader reader = new SAXReader();
             Document document = reader.read(xml);
             Element root = document.getRootElement();
@@ -106,6 +106,10 @@ public class XmlServerLoader implements ServerLoader {
         Element viewSqlElem = elem.element("viewSql");
         if (viewSqlElem != null) {
             tableConfig.setViewSql((String) viewSqlElem.getData());
+        }
+        Element sheetNumberElem = elem.element("sheetNumber");
+        if (sheetNumberElem != null) {
+            tableConfig.setSheetNumber(Integer.valueOf((String) sheetNumberElem.getData()));
         }
         return tableConfig;
     }
