@@ -61,6 +61,10 @@ public class ExpressionColumn extends Expression {
 
     @Override
     public void mapColumns(ColumnResolver resolver, int level) {
+        // 如果tableAlias不相等 退出 等待下一个
+        if (tableAlias != null && !tableAlias.equals(resolver.getTableAlias())) {
+            return;
+        }
         for (Column col : resolver.getColumns()) {
             String n = col.getName();
             if (CompareUtil.equalsIdentifiers(columnName, n)) {

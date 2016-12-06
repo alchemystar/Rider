@@ -34,4 +34,9 @@ public class XlsxCursor extends BaseCursor {
     public void init() {
 
     }
+
+    @Override
+    public void reset() {
+        xlsxStorage.reset();
+    }
 }

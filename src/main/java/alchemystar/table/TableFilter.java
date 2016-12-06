@@ -103,6 +103,8 @@ public class TableFilter implements ColumnResolver {
         if (join != null) {
             join.reset();
         }
+        // 重置cursor
+        cursor.reset();
         state = BEFORE_FIRST;
         foundOne = false;
     }
@@ -146,14 +148,8 @@ public class TableFilter implements ColumnResolver {
             if (!isOk(filterCondition)) {
                 continue;
             }
-            // 在这一步check 当前row是否符合joinCondition
-            boolean joinConditionOk = isOk(joinCondition);
             if (state == FOUND) {
-                if (joinConditionOk) {
-                    foundOne = true;
-                } else {
-                    continue;
-                }
+                foundOne = true;
             }
             if (join != null) {
                 // found one 后 reset其后所有的join
@@ -165,9 +161,7 @@ public class TableFilter implements ColumnResolver {
                 }
             }
             // 当前返回true的时候就停在Table1.currentRow1,Table2.currentRow2......上
-            if (state == NULL_ROW || joinConditionOk) {
-                return true;
-            }
+            return true;
 
         }
         state = AFTER_LAST;
@@ -177,6 +171,9 @@ public class TableFilter implements ColumnResolver {
     private boolean isOk(Expression condition) {
         if (condition == null) {
             return true;
+        }
+        if (join != null) {
+            join.next();
         }
         return Boolean.TRUE.equals(condition.getBooleanValue(session));
     }

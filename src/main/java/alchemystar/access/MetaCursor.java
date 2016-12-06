@@ -37,6 +37,11 @@ public class MetaCursor implements Cursor {
 
     }
 
+    @Override
+    public void reset() {
+
+    }
+
     public boolean previous() {
         throw new RuntimeException("MetaCursor not support previous");
     }

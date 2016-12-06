@@ -34,4 +34,6 @@ public interface Cursor {
      */
     void init();
 
+    void reset();
+
 }

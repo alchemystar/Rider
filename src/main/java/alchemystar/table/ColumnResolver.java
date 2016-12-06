@@ -12,4 +12,6 @@ public interface ColumnResolver {
     Value getValue(Column column);
 
     TableFilter getTableFilter();
+
+    String getTableAlias();
 }

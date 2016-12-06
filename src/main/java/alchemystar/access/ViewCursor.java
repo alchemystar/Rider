@@ -34,4 +34,9 @@ public class ViewCursor extends BaseCursor {
     public void init() {
         viewStorage = new ViewStorage(sesson, table);
     }
+
+    @Override
+    public void reset() {
+        viewStorage.reset();
+    }
 }

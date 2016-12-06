@@ -34,6 +34,11 @@ public class FileCursor extends BaseCursor {
         return fileStorage.previous();
     }
 
+    @Override
+    public void reset() {
+        fileStorage.reset();
+    }
+
     public void init() {
 
     }

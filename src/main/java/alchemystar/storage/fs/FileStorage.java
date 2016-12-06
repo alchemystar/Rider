@@ -49,6 +49,10 @@ public class FileStorage {
         initRead();
     }
 
+    public void reset() {
+        current = -1;
+    }
+
     public Row get() {
         return rows.get(current);
     }

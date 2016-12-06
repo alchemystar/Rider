@@ -200,7 +200,6 @@ public class Parser {
                 command.addCondition(on);
             }
             join.removeJoinCondition();
-            top.removeJoin();
             command.addTableFilter(join, true);
             top = join;
         }

@@ -55,6 +55,10 @@ public class XlsxStorage {
         return false;
     }
 
+    public void reset() {
+        current = -1;
+    }
+
     public boolean previous() {
         if (current > 0) {
             current = current - 1;
@@ -132,5 +136,5 @@ public class XlsxStorage {
             return String.valueOf(cell.getStringCellValue());
         }
     }
-    
+
 }

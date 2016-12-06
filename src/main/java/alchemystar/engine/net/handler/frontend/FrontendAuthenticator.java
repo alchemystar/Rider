@@ -83,7 +83,9 @@ public class FrontendAuthenticator extends ChannelHandlerAdapter {
             return;
         }
         source.setUser(authPacket.user);
-        source.setSchema(authPacket.database);
+        if(!StringUtils.isEmpty(authPacket.database)) {
+            source.setSchema(authPacket.database);
+        }
         source.setHost(((InetSocketAddress) ctx.channel().remoteAddress()).getAddress().getHostAddress());
         source.setPort(((InetSocketAddress) ctx.channel().remoteAddress()).getPort());
         success(ctx);

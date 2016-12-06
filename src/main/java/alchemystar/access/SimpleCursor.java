@@ -43,4 +43,9 @@ public class SimpleCursor implements Cursor {
     public void init() {
         // do nothing
     }
+
+    @Override
+    public void reset() {
+        current = -1;
+    }
 }
