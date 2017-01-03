@@ -95,3 +95,5 @@ select a.id,b.id from t_rider as a join t_archer as b on a.id=b.id where id>1;
 
 
 
+
+
