@@ -7,6 +7,9 @@
 (5)支持常用select语句where,condition,行运算等    
 (6)支持视图功能，即用旧表的SQL定义新表   
 (7)支持各种文件格式(各种分隔符分割,Xlsx)   
+## QQ群
+608733920
+
 ##启动
 ```
 git clone https://github.com/alchemystar/Rider.git
@@ -20,8 +23,8 @@ sh start.sh
 ```
 <database>
     <port>8090</port> <!--server 端口号-->
-    <user>pa123</user> <!--server 用户名-->
-    <pass>Mi123</pass> <!--server 密码-->
+    <user>pay</user> <!--server 用户名-->
+    <pass>123123123</pass> <!--server 密码-->
     <schema>  <!--schema定义-->
         <name>test</name> <!--schema名称-->
          <table>
@@ -43,7 +46,7 @@ sh start.sh
 </database>
 ```
 ## 使用
-直接连接 mysql -upa123 -pMi123 -P8090 -h127.0.0.1  
+直接连接 mysql -upay -p123123123 -P8090 -h127.0.0.1  
 jdbc连接 jdbc:mysql://127.0.0.1/test?user=pay&password=MiraCle
 ### 创建表
 ```

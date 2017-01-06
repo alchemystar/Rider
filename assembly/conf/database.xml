@@ -1,7 +1,7 @@
 <database>
     <port>8090</port>
     <user>pay</user>
-    <pass>MiraCle</pass>
+    <pass>123123123</pass>
     <schema>
         <name>test</name>
         <table>
