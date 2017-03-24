@@ -168,7 +168,7 @@ public class Select extends Query {
         long offset = -1;
         if (offsetExpr != null) {
             Value v = offsetExpr.getValue(session);
-            offset = ((ValueLong) v).getLong() * limitRows;
+            offset = ((ValueLong) v).getLong();
 
         }
         int rowNumber = 0;
