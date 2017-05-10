@@ -1,4 +1,4 @@
-# Rider 文档解析中间件
+# Rider 文件数据库
 ## 用SQL解析文件
 (1)完全支持MySql协议  
 (2)完全支持Mybatis-Generator  
