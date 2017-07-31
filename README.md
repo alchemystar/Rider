@@ -47,7 +47,7 @@ sh start.sh
 ```
 ## 使用
 直接连接 mysql -upay -p123123123 -P8090 -h127.0.0.1  
-jdbc连接 jdbc:mysql://127.0.0.1/test?user=pay&password=MiraCle
+jdbc连接 jdbc:mysql://127.0.0.1/test?user=pay&password=123123123
 ### 创建表
 ```
 create table if not exists t_archer( 
