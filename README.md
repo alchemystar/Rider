@@ -23,7 +23,7 @@ sh start.sh
 ```
 <database>
     <port>8090</port> <!--server 端口号-->
-    <user>pay</user> <!--server 用户名-->
+    <user>user</user> <!--server 用户名-->
     <pass>123123123</pass> <!--server 密码-->
     <schema>  <!--schema定义-->
         <name>test</name> <!--schema名称-->
@@ -46,8 +46,8 @@ sh start.sh
 </database>
 ```
 ## 使用
-直接连接 mysql -upay -p123123123 -P8090 -h127.0.0.1  
-jdbc连接 jdbc:mysql://127.0.0.1/test?user=pay&password=123123123
+直接连接 mysql -uuser -p123123123 -P8090 -h127.0.0.1  
+jdbc连接 jdbc:mysql://127.0.0.1/test?user=user&password=123123123
 ### 创建表
 ```
 create table if not exists t_archer( 
