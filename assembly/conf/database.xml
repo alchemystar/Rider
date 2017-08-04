@@ -1,6 +1,6 @@
 <database>
     <port>8090</port>
-    <user>pay</user>
+    <user>user</user>
     <pass>123123123</pass>
     <schema>
         <name>test</name>
