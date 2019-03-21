@@ -2,11 +2,13 @@
 ## 用SQL解析文件
 (1)完全支持MySql协议  
 (2)完全支持Mybatis-Generator  
-(3)支持Schema和Table  
-(4)支持客户端创建Schema和Table  
-(5)支持常用select语句where,condition,行运算等    
-(6)支持视图功能，即用旧表的SQL定义新表   
-(7)支持各种文件格式(各种分隔符分割,Xlsx)   
+(3)完全支持Mybatis
+(4)支持Schema和Table  
+(5)支持客户端创建Schema和Table  
+(6)支持常用select语句where,condition,行运算等    
+(7)支持视图功能，即用旧表的SQL定义新表   
+(8)支持各种文件格式(各种分隔符分割,Xlsx)   
+(9)支持按时间动态切换表
 ## QQ群
 608733920
 
