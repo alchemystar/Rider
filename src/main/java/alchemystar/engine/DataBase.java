@@ -30,9 +30,9 @@ public class Database {
     private volatile boolean metaTablesInitialized;
     // 默认端口号是8090
     private int serverPort = 8090;
-    // 默认用户名密码是pay|miracle
-    private String userName = "pay";
-    private String passWd = "MiraCle";
+    // 默认用户名密码是
+    private String userName = "3213214";
+    private String passWd = "3213215";
 
     // 单例模式
     static {
