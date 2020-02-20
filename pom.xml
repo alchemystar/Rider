@@ -8,6 +8,7 @@
     <artifactId>Rider</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+
     <properties>
         <app.encoding>UTF-8</app.encoding>
         <app.version>1.0-SNAPSHOT</app.version>
