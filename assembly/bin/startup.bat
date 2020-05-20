@@ -28,6 +28,6 @@
 
  @ECHO ÅäÖÃÎÄ¼þÄ¿Â¼
  ECHO %Rider_HOME_CONFIG%
- java -cp %CP% %MAIN% %OPTS%  -Drider.home=%Rider_HOME% -Drider.log.home=%Rider_HOME_LOG% -conf %Rider_HOME_CONFIG%
+ java -cp %CP% %MAIN% %OPTS% -Drider.home=%Rider_HOME% -Drider.log.home=%Rider_HOME_LOG% -conf %Rider_HOME_CONFIG%
 
  pause
