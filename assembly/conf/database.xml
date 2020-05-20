@@ -16,7 +16,7 @@
                 extension VARCHAR comment 'extension' )Engine='archer' SEP=',' SKIPWRONG='false' comment='just for test'
             </sql>
             <skipRows>3</skipRows>
-            <pathPattern>/Users/alchemystar/tmp/rider/rider_%d{yyyy-MM-dd}.txt</pathPattern>
+            <pathPattern>D://MyNosql/table/tmp/rider/rider_%d{yyyy-MM-dd}.txt</pathPattern>
         </table>
         <table>
             <sql>
