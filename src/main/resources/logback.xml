@@ -1,0 +1,68 @@
+<configuration>
+    <property name="LOG_HOME" value="${rider.log.home}" />
+    <property name="DEFAULT_PATTERN" value="%d %-5level [%X{ctxLogId}][%thread] %logger{5} - %msg%n"/>
+    <property name="LEVEL" value="info"/>
+    <property name="LEVEL_DIGEST" value="warn"/>
+    <property name="CHARSET" value="UTF-8"/>
+    <property name="MAX_INDEX" value="30"/>
+
+    <!-- Appenders -->
+    <appender name="COMMON" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/common.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/common.log</fileNamePattern>
+            <maxHistory>${MAX_INDEX}</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${DEFAULT_PATTERN}</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+    </appender>
+
+    <appender name="SQL-DIGEST" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/sql-digest.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/sql-digest.log</fileNamePattern>
+            <maxHistory>${MAX_INDEX}</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${DEFAULT_PATTERN}</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/error.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/error.log</fileNamePattern>
+            <maxHistory>${MAX_INDEX}</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${DEFAULT_PATTERN}</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+    </appender>
+
+    <!-- Loggers -->
+    <logger name="alchemystar" level="${LEVEL}" additivity="false">
+        <appender-ref ref="COMMON"/>
+        <appender-ref ref="ERROR"/>
+    </logger>
+
+    <logger name="sql-digest" level="${LEVEL}" additivity="false">
+        <appender-ref ref="SQL-DIGEST"/>
+        <appender-ref ref="ERROR"/>
+    </logger>
+
+    <!-- Loggers : Root Logger -->
+    <root level="${LEVEL}">
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

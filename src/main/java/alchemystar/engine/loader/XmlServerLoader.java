@@ -44,7 +44,7 @@ public class XmlServerLoader implements ServerLoader {
             loadPasswd(root);
             loadSchema(root);
         } catch (Exception e) {
-            System.out.println("Load config error" + e);
+            System.out.println("Load config error" + e.getMessage());
             System.exit(-1);
         }
     }
